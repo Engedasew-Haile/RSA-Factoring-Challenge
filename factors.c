@@ -9,27 +9,29 @@ int main(int argc, char** argv)
 	if (argc != 2)
 	{
 	printf("Usage: factors <file>\n");
-	return 1;
+	return (1);
 	}
 
 /**Open the file and check for errors */
 
-FILE* fp = fopen(argv[1], "r");
+FILE** fp = fopen(argv[1], "r");
 	if (fp == NULL)
 	{
 	printf("Error while opening the file\n");
-	return 1;
+	return (1);
 	}
 
 /**Read the numbers from the file one by one*/
 
-	int n;
+	int n
+		;
 	while (fscanf(fp, "%d", &n) == 1)
 	{
 	/*Factorize the number*/
-	int p =2;
-	int q = n / p;
-	while (p <= )
+	int p = 2;
+	int q = n / p
+		;
+	while (p <= q)
 	{
 	if (n % p == 0)
 	{

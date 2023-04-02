@@ -1,33 +1,20 @@
-#include "factor.h"
-
-/**
- * main - main function
- *
- * Author: Thaoban Abdrasheed
- * Return: void
- */
-int main(int argc, char *argv[])
+#include <stdio.h>
+int main()
 {
-	FILE *fptr;
-	size_t count;
-	ssize_t line;
-	char *buffer = NULL;
-
-
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: factor <filename>\n");
-		exit(EXIT_FAILURE);
-	}
-	fptr = fopen(argv[1], "r");
-	if (fptr == NULL)
-	{
-		fprintf(stderr, "Error: can't open file %s\n", argv[1]);
-		exit(EXIT_FAILURE);
-	}
-	while((line = getline(&buffer, &count, fptr)) != -1)
-	{
-		factorize(buffer);
-	}
-return (0);
+    int n; //Number to factorize
+    int p = 2; //Smallest possible prime
+ 
+    printf("Enter the number to factorize: ");
+    scanf("%d",&n);
+ 
+    while (n > 1) {
+        if (n % p == 0) { //Check if 'p' is a factor
+            printf("%d\n",p); //Print the factor
+            n /= p; //Divide n by the factor
+        }
+        else //If 'p' is not a factor
+            p++; //Increment 'p'
+    }
+ 
+    return 0;
 }

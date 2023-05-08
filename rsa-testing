@@ -1,0 +1,21 @@
+#include <stdio.h>
+int main()
+{
+    int n; //Number to factorize
+    int p = 2; //Smallest possible prime
+
+    printf("Enter the number to factorize: ");
+    scanf("%d",&n);
+
+    while (n > 1) {
+        if (n % p == 0) { //Check if 'p' is a factor
+            printf("%d\n",p); //Print the factor
+            n /= p; //Divide n by the factor
+        }
+        else //If 'p' is not a factor
+            p++; //Increment 'p'
+    }
+
+    return 0;
+}
+

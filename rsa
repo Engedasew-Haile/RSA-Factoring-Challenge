@@ -1,21 +1,48 @@
-#include <stdio.h>
-int main()
+#!/usr/bin/env bash
+#is a challenge
+check_factor()
 {
-    int n; //Number to factorize
-    int p = 2; //Smallest possible prime
+	if [ $# -ne 3 ];
+        then
+                args=("$@")
+                count=0
+                num2=1
+                for a in ${args[*]};
+                do
+                        if [ $count -gt 1 ];
+                        then
+                                num2=$(echo $a*$num2 | bc)
+                        fi
+                        count=$((count + 1))
+                done
+        else
+                num2=$3
+        fi
 
-    printf("Enter the number to factorize: ");
-    scanf("%d",&n);
+        num1=$2
+        num=$(echo "$1" | tr ':' '=')
 
-    while (n > 1) {
-        if (n % p == 0) { //Check if 'p' is a factor
-            printf("%d\n",p); //Print the factor
-            n /= p; //Divide n by the factor
-        }
-        else //If 'p' is not a factor
-            p++; //Increment 'p'
-    }
+        result=$(echo "if($num2 > $num1) 1 else 0" | bc)
+	        if ((result == 1)); then
+		        numcp=$num1
+		        num1=$num2
+		        num2=$numcp
+                fi
 
-    return 0;
+        echo "$num$num1*$num2"
 }
 
+if [ $# -ne 1 ]
+then
+        echo 'Usage: rsa <file>'
+        exit 1
+else
+
+        while read i
+        do
+
+                result=$(factor "$i")
+                check_factor $result
+
+        done < "$1"
+fi
